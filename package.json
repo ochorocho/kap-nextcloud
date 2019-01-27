@@ -1,0 +1,17 @@
+{
+  "name": "kap-nextcloud",
+  "version": "1.0.0",
+  "description": "Upload to nextcloud",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "kap-plugin"
+  ],
+  "author": "ochorocho",
+  "license": "MIT",
+  "dependencies": {
+    "webdav": "^2.5.0"
+  }
+}

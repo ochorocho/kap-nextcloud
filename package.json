@@ -12,7 +12,6 @@
   "author": "ochorocho",
   "license": "MIT",
   "dependencies": {
-    "dateformat": "^3.0.3",
     "moment": "^2.24.0",
     "request": "^2.88.0",
     "url-join": "^4.0.0"

@@ -6,6 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ochorocho/kap-nextcloud.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ochorocho/kap-nextcloud/issues"
+  },
   "keywords": [
     "kap-plugin"
   ],

@@ -1,3 +1,5 @@
 /nextcloud.js
 /.idea
 /node_modules
+/request.js
+/upload.js

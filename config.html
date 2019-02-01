@@ -1,0 +1,60 @@
+<style>
+    html {
+        font-family: Arial;
+        background: #dedede;
+        padding: 0px 20px 0px;
+    }
+
+    input {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #999999;
+        font-size: 14px;
+    }
+
+    input[type=submit] {
+        margin-top: 5px;
+    }
+
+    .logo {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .logo img {
+        max-width: 100%;
+    }
+
+    label {
+        font-size: 12px;
+        color: #666;
+        padding: 5px 0;
+        display: block;
+    }
+</style>
+
+<div class="logo">
+    <img src="images/nextcloud.svg"/>
+</div>
+
+<label>
+    Nextcloud URL
+    <input required name="url" type="text" placeholder="https://cloud.example.org"/>
+</label>
+
+<label>
+    Username
+    <input required name="username" type="text" placeholder="UserName"/>
+</label>
+
+<label>
+    Password
+    <input required name="password" type="password" placeholder="SecurePassword"/>
+</label>
+
+<label>
+    Path on Nextcloud to store files
+    <input required name="path" type="path" placeholder="/screencasts"/>
+</label>
+
+<input type="submit" value="save">

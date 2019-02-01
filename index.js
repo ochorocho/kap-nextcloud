@@ -4,6 +4,10 @@ const path = require('path');
 const urljoin = require('url-join');
 const request = require('request');
 const moment = require('moment');
+const {dialog} = require('electron');
+const getConfig = require('./config');
+
+const err = message => dialog.showMessageBox({message, type: "error"});
 
 const action = async context => {
     const filePath = await context.filePath();
@@ -12,6 +16,22 @@ const action = async context => {
     const validUntil = moment().add(7, 'days').format('YYYY-MM-DD');
     const uploadUrl = urljoin(context.config.get('url'), '/remote.php/webdav/', fileTarget);
     const shareUrl = urljoin(context.config.get('url'),'/ocs/v1.php/apps/files_sharing/api/v1/shares');
+
+
+    context.config.set('username', await getConfig(context));
+    if (context.config.has('url') == null || context.config.has('username') == null || context.config.has('password') == null || context.config.has('path') == null) {
+        context.setProgress('Authorizing…');
+        try {
+            context.config.set('username', await getConfig(context));
+        } catch (error) {
+            if (error.message === 'canceled') {
+                context.cancel();
+            } else {
+                err(error.message);
+            }
+            return;
+        }
+    }
 
     /**
      * Create Read Stream of filePath

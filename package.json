@@ -1,6 +1,6 @@
 {
   "name": "kap-nextcloud",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Upload to Nextcloud",
   "main": "index.js",
   "scripts": {

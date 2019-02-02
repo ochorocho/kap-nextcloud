@@ -92,19 +92,16 @@ const nextcloud = {
         url: {
             title: 'Url',
             type: 'string',
-            default: '',
             required: true
         },
         username: {
             title: 'Username',
             type: 'string',
-            default: '',
             required: true
         },
         password: {
             title: 'Password',
             type: 'string',
-            default: '',
             required: true
         },
         path: {

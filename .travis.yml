@@ -2,6 +2,6 @@ language: node_js
 node_js:
   - "10"
 before_install:
-  - npm -g install eslint babel-eslint
+  - npm install
 script:
-  - eshint *.js
+  -  node_modules/.bin/eslint *.js

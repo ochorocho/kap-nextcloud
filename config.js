@@ -1,18 +1,18 @@
 const electron = require('electron');
-const {ipcMain} = require('electron')
+const {ipcMain} = require('electron');
 
 const BrowserWindow = electron.BrowserWindow || electron.remote.BrowserWindow;
 
 const getConfig = context => {
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
 
         let configWindow = new BrowserWindow({
             width: 400,
             height: 440,
             alwaysOnTop: true
         });
-        configWindow.loadURL(`file://${__dirname}/` + 'config.html')
+        configWindow.loadURL(`file://${__dirname}/` + 'config.html');
 
         let configValues = {
             url: context.config.get("url"),
@@ -23,13 +23,13 @@ const getConfig = context => {
         configWindow.config = configValues;
 
         ipcMain.on('asynchronous-message', (event, arg) => {
-            for (key in arg) {
-                context.config.set(key, arg[key])
+            for (let key in arg) {
+                context.config.set(key, arg[key]);
             }
         });
 
         configWindow.on('closed', () => {
-            resolve()
+            resolve();
         });
     });
 };

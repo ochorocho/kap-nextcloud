@@ -1,4 +1,3 @@
-'use strict';
 const fs = require('fs');
 const path = require('path');
 const urljoin = require('url-join');
@@ -10,7 +9,7 @@ const action = async context => {
     /**
      * When to open auth window
      */
-    if (context.config.get('url') == "" || context.config.get('username') == "" || context.config.get('password') == "" || context.config.get('path') == "") {
+    if (context.config.get('url') === "" || context.config.get('username') === "" || context.config.get('password') === "" || context.config.get('path') === "") {
         context.setProgress('Authorizing…');
         await getConfig(context);
     }
@@ -46,7 +45,7 @@ const action = async context => {
             },
             body: readmeStream
         },
-        function (error, response, body) {
+        function (error) {
             if (error) {
                 return console.error('Nextcloud upload failed:', error);
             }

@@ -15,10 +15,10 @@ const getConfig = context => {
         configWindow.loadURL(`file://${__dirname}/` + 'config.html');
 
         let configValues = {
-            url: context.config.get("url"),
-            username: context.config.get("username"),
-            password: context.config.get("password"),
-            path: context.config.get("path")
+            url: context.config.get("url") == undefined ? '' : context.config.get("url"),
+            username: context.config.get("username") == undefined ? '' : context.config.get("username"),
+            password: context.config.get("password") == undefined ? '' : context.config.get("password"),
+            path: context.config.get("path") == undefined ? '' : context.config.get("path")
         };
         configWindow.config = configValues;
 

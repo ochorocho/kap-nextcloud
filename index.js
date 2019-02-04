@@ -1,4 +1,3 @@
-'use strict';
 const fs = require('fs');
 const path = require('path');
 const urljoin = require('url-join');
@@ -10,17 +9,18 @@ const action = async context => {
     /**
      * When to open auth window
      */
-    if (context.config.get('url') == "" || context.config.get('username') == "" || context.config.get('password') == "" || context.config.get('path') == "") {
+    if (context.config.get('url') === undefined || context.config.get('username') === undefined || context.config.get('password') === undefined || context.config.get('path') === undefined) {
         context.setProgress('Authorizing…');
         await getConfig(context);
     }
 
+    var url = context.config.get('url') == undefined ? '/' : context.config.get('url');
     const filePath = await context.filePath();
     const filename = path.basename(filePath);
     const fileTarget = urljoin(context.config.get('path') + filename);
     const validUntil = moment().add(7, 'days').format('YYYY-MM-DD');
-    const uploadUrl = urljoin(context.config.get('url'), '/remote.php/webdav/', fileTarget);
-    const shareUrl = urljoin(context.config.get('url'),'/ocs/v1.php/apps/files_sharing/api/v1/shares');
+    const uploadUrl = urljoin(url, '/remote.php/webdav/', fileTarget);
+    const shareUrl = urljoin(url,'/ocs/v1.php/apps/files_sharing/api/v1/shares');
 
     /**
      * Create Read Stream of filePath
@@ -46,7 +46,7 @@ const action = async context => {
             },
             body: readmeStream
         },
-        function (error, response, body) {
+        function (error) {
             if (error) {
                 return console.error('Nextcloud upload failed:', error);
             }

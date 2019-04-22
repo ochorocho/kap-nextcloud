@@ -28,7 +28,7 @@ const action = async context => {
     const dateUntil = moment().add(context.config.get('lifeTime'), 'days');
     const validUntil = dateUntil.format('YYYY-MM-DD');
     const uploadUrl = join(url, '/remote.php/webdav/', fileTarget);
-    const shareUrl = join(url,'/ocs/v1.php/apps/files_sharing/api/v1/shares');
+    const shareUrl = join(url, '/ocs/v1.php/apps/files_sharing/api/v1/shares');
 
     /**
      * Create Read Stream of filePath
@@ -37,7 +37,7 @@ const action = async context => {
     readmeStream.on('error', console.log);
     const {size} = fs.statSync(filePath);
     const headers = {'OCS-APIRequest': 'true', 'Content-Length': size,};
-    const auth = { username: context.config.get('username'), password: context.config.get('password') };
+    const auth = {username: context.config.get('username'), password: context.config.get('password')};
 
     /**
      *  Upload File to Nextcloud
@@ -51,7 +51,7 @@ const action = async context => {
             body: readmeStream
         },
         function (error, response) {
-            if(response.statusCode !== 201) {
+            if (response.statusCode !== 201) {
                 context.config.delete("username");
                 context.config.delete("password");
             }
@@ -72,7 +72,7 @@ const action = async context => {
     }
     let additionalInfo = `\n\nValid until: ${dateUntil.format('DD-MM-YYYY')}`
 
-    if(context.config.get('randomPassword') === true) {
+    if (context.config.get('randomPassword') === true) {
         let generator = require('generate-password');
 
         let password = generator.generate({
@@ -93,7 +93,7 @@ const action = async context => {
         },
         function (error, response, body) {
             try {
-                if(response.statusCode === 403) {
+                if (response.statusCode === 403) {
                     context.notify('Public upload was disabled by Nextcloud admin, use random password option in config');
                 } else {
                     context.copyToClipboard(body.ocs.data.url + additionalInfo);

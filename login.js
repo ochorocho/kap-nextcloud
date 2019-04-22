@@ -16,7 +16,7 @@ const login = context => {
             let url = request.url.substr(5);
             let elements = url.split('&');
 
-            elements.forEach(function(item) {
+            elements.forEach(function (item) {
                 let key = item.split(/:(.*)/)[0]
                 let value = item.split(/:(.*)/)[1]
                 credentials[key] = value
@@ -44,7 +44,10 @@ const login = context => {
             }
         });
 
-        let extraHeaders = { userAgent: 'KapScreenRecorder', extraHeaders: 'OCS-APIREQUEST: true\n ACCEPT_LANGUAGE: "en-US"' }
+        let extraHeaders = {
+            userAgent: 'KapScreenRecorder',
+            extraHeaders: 'OCS-APIREQUEST: true\n ACCEPT_LANGUAGE: "en-US"'
+        }
         authWindow.loadURL(join(context.config.get("url"), '/index.php/login/flow'), extraHeaders);
 
         /**

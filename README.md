@@ -7,7 +7,7 @@ KAP screen record plugin to upload files to Nextcloud
 * Configure lifetime of a share
 * Works with Kap 3
 
-:warning: Removed support for for kap 2 
+:warning: Removed support for Kap 2 
 
 ## Share
 

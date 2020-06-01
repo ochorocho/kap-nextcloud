@@ -19,13 +19,13 @@
   "author": "ochorocho",
   "license": "MIT",
   "dependencies": {
-    "generate-password": "^1.4.2",
-    "moment": "^2.24.0",
-    "request": "^2.88.0",
+    "generate-password": "^1.5.1",
+    "moment": "^2.26.0",
+    "request": "^2.88.2",
     "url-join": "^4.0.1"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "eslint": "^5.16.0"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.1.0"
   }
 }

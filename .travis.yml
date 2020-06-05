@@ -6,15 +6,13 @@ before_install:
 script:
 - node_modules/.bin/eslint *.js
 before_deploy:
-  - npm build
+- npm build
 deploy:
   provider: npm
   email: rothjochen@gmail.com
   api_key:
-    secure: yAMEhmCvoIN1i4PW+2hcvKGytJcglyxYpL0uIiWCBQJeK0VoYLoTO+47ddh8ILCZ75dDeqJzr8NuKlD1wa51IjqhtfZhV43QWgb1Oh8WUCNvDzo8YgciIXcrwlopC7g9GsoW5d2+e4qTfnO0b1htN9MoBLMALgkKfVm8vyMzeAjScZsZaJ3NcWjTkYdVh3YoiLoqK5iJvFjS+lZYMhr++82WQgvn8Cn1Z2e/czuch5XP2PoNnxbC8D33zZit3GFqPsgWTvJ+u8K+DOXk+Dn0+m9sCJj/ZolRIdw96YUJ4Bqogxzkv7Rjx2iLKMMYbl4LUclYCOi6IEMmE+7B1RyyoEt8fkg8m+4NTaEdz5SmW27vZ/fmI/cqgMWp6v/9SUUhgNqTD8hHh+FemN1cFbs73+fxUnaxbhaE0rs48YOJpwH2MUwUWilXsDg6n840RuCSpVRyWUCQYLqfhpH1tfdOsdmW/1LywZng0+HazqAvLw+6grFLgV9th+fMYghLfpFNp0fc+Q4u1Ahu6+JeZqv/LP0Ta10KOma79ks0/3FIZ7+dhLwbcnICPrMl0fvQ59jERRIjS0it3+GgI0EDR6xyEeAenYR1nlDW6SNMmPJ+6y4VPcrzvvBtCJAuN5AV/L2hlYTJm+XCIIz1kRtOwBlGVDyFIWMr8iTOh3mCKTxpPq4=
+    secure: GQeZ+KQira/ZvbLFrRQoaV4MhhXVv+GMLAyXW+7Bq19utvHmu2qcg/LwqT/h/20cZf+6GRUcpqxjV80DS5w4YB2QS539Vjsb2sL7a36UR6uwPu5y+8HoS99y+WQZQq7F8tz8wZ/NzuUZQhoi53/ZygpQM6W4juns6hzX9RJHthHAxSJFxxtnSxw0St2SDHjZO530Mur0fNy1B6zOA5WmEptz9AKaeMemBh1vMKtl8zV/ixDT3BZqsEo/ehemEJDk5vRb2oytI0xgZHzHYJU23TNxKfT89Yfx4CgGBU/K+c/m8JPqn+V62FqoYlEErMm+kwejZk3pPQX2e4WOmZphwfx3Ub3d3gGFZaiS9i/TtYj/VAXrlc7zneDJFhrESfsqAmOAb2u0KaXD/qdrQhHOlQ8Bj4bgcozpxt36fLUPHKVmag5BOefpQCdIvJAgk8ppOE78s/QjryoF6IPKNIPhqa7mjdzd8vSjJ2zvFJpTSkwg21FMpshJjms51dvWJCmtNda3Hw4g/h+q7clh2BXYU24vkF6WCf7n/7tzrpX3reYq66tlGnve8XxTF1E4SC6F1FDu+STplii5jAhVL1MzgdisHJxf+3l042GDFpbRYdrF4jU2z9DL/USO922fMhf6jLHkL1YipT0K19nuIc+L3Lg7Le2RqcJDLyHeZfR/08g=
   on:
     tags: true
     repo: ochorocho/kap-nextcloud
-  cleanup: false
-  skip_cleanup: true
-
+  skip_cleanup: 'true'

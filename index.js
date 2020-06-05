@@ -5,6 +5,52 @@ const request = require('request');
 const moment = require('moment');
 const login = require('./login');
 
+function extracted (fileTarget, validUntil, dateUntil, context, shareUrl, headers2, auth) {
+    /**
+     * Get share link
+     */
+    let shareOptions = {
+        path: fileTarget,
+        shareType: 3,
+        permissions: 1,
+        expireDate: validUntil
+    }
+    let additionalInfo = `\n\nValid until: ${dateUntil.format('DD-MM-YYYY')}`
+
+    if (context.config.get('randomPassword') === true) {
+        let generator = require('generate-password')
+
+        let password = generator.generate({
+            length: 10,
+            numbers: true
+        })
+        shareOptions.password = password
+        additionalInfo += `\nPassword: ${password}`
+    }
+
+    context.setProgress('Getting link…')
+    request({
+          method: 'POST',
+          uri: shareUrl,
+          headers: headers2,
+          auth: auth,
+          json: shareOptions
+      },
+      function (error, response, body) {
+          try {
+              if (response.statusCode === 403) {
+                  context.notify('Public upload was disabled by Nextcloud admin, use random password option in config')
+              } else {
+                  context.copyToClipboard(body.ocs.data.url + additionalInfo)
+                  context.notify('Nextcloud uploaded, link copied to Clipboard')
+                  context.setProgress('Done', 'completed')
+              }
+          } catch (e) {
+              context.notify('Sorry mate! Could not get share link')
+          }
+      })
+}
+
 const action = async context => {
 
     if (!context.config.has('username') || !context.config.has('password')) {
@@ -27,8 +73,8 @@ const action = async context => {
     const fileTarget = join(context.config.get('path') + filename);
     const dateUntil = moment().add(context.config.get('lifeTime'), 'days');
     const validUntil = dateUntil.format('YYYY-MM-DD');
-    const uploadUrl = join(url, '/remote.php/webdav/', fileTarget);
-    const shareUrl = join(url, '/ocs/v1.php/apps/files_sharing/api/v1/shares');
+    const uploadUrl = join(url, '/remote.php/webdav/', encodeURI(fileTarget));
+    const shareUrl = join(url, '/ocs/v2.php/apps/files_sharing/api/v1/shares');
 
     /**
      * Create Read Stream of filePath
@@ -37,13 +83,14 @@ const action = async context => {
     readmeStream.on('error', console.log);
     const {size} = fs.statSync(filePath);
     const headers = {'OCS-APIRequest': 'true', 'Content-Length': size,};
+    const headers2 = {'OCS-APIRequest': 'true', 'Accept': 'application/json'};
     const auth = {username: context.config.get('username'), password: context.config.get('password')};
 
     /**
      *  Upload File to Nextcloud
      */
     context.setProgress('Uploading…');
-    await request({
+    request({
             method: 'PUT',
             uri: uploadUrl,
             headers: headers,
@@ -59,49 +106,8 @@ const action = async context => {
             if (error) {
                 return console.error('Nextcloud upload failed:', error);
             }
-        });
 
-    /**
-     * Get share link
-     */
-    let shareOptions = {
-        path: fileTarget,
-        shareType: 3,
-        permissions: 1,
-        expireDate: validUntil
-    }
-    let additionalInfo = `\n\nValid until: ${dateUntil.format('DD-MM-YYYY')}`
-
-    if (context.config.get('randomPassword') === true) {
-        let generator = require('generate-password');
-
-        let password = generator.generate({
-            length: 10,
-            numbers: true
-        });
-        shareOptions.password = password;
-        additionalInfo += `\nPassword: ${password}`
-    }
-
-    context.setProgress('Getting link…');
-    await request({
-            method: 'POST',
-            uri: shareUrl,
-            headers: headers,
-            auth: auth,
-            json: shareOptions
-        },
-        function (error, response, body) {
-            try {
-                if (response.statusCode === 403) {
-                    context.notify('Public upload was disabled by Nextcloud admin, use random password option in config');
-                } else {
-                    context.copyToClipboard(body.ocs.data.url + additionalInfo);
-                    context.notify('Nextcloud uploaded, link copied to Clipboard');
-                }
-            } catch (e) {
-                context.notify("Sorry mate! Could not get share link");
-            }
+            extracted(fileTarget, validUntil, dateUntil, context, shareUrl, headers2, auth)
         });
 };
 

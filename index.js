@@ -5,7 +5,7 @@ const request = require('request');
 const moment = require('moment');
 const login = require('./login');
 
-function extracted (fileTarget, validUntil, dateUntil, context, shareUrl, headers2, auth) {
+function getShareLink (fileTarget, validUntil, dateUntil, context, shareUrl, headers2, auth) {
     /**
      * Get share link
      */
@@ -107,7 +107,7 @@ const action = async context => {
                 return console.error('Nextcloud upload failed:', error);
             }
 
-            extracted(fileTarget, validUntil, dateUntil, context, shareUrl, headers2, auth)
+            getShareLink(fileTarget, validUntil, dateUntil, context, shareUrl, headers2, auth)
         });
 };
 

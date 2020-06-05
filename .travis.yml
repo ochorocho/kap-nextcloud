@@ -1,7 +1,16 @@
 language: node_js
 node_js:
-  - "10"
+- '10'
 before_install:
-  - npm install
+- npm install
 script:
-  -  node_modules/.bin/eslint *.js
+- node_modules/.bin/eslint *.js
+deploy:
+  provider: npm
+  email: rothjochen@gmail.com
+  api_key:
+    secure: yAMEhmCvoIN1i4PW+2hcvKGytJcglyxYpL0uIiWCBQJeK0VoYLoTO+47ddh8ILCZ75dDeqJzr8NuKlD1wa51IjqhtfZhV43QWgb1Oh8WUCNvDzo8YgciIXcrwlopC7g9GsoW5d2+e4qTfnO0b1htN9MoBLMALgkKfVm8vyMzeAjScZsZaJ3NcWjTkYdVh3YoiLoqK5iJvFjS+lZYMhr++82WQgvn8Cn1Z2e/czuch5XP2PoNnxbC8D33zZit3GFqPsgWTvJ+u8K+DOXk+Dn0+m9sCJj/ZolRIdw96YUJ4Bqogxzkv7Rjx2iLKMMYbl4LUclYCOi6IEMmE+7B1RyyoEt8fkg8m+4NTaEdz5SmW27vZ/fmI/cqgMWp6v/9SUUhgNqTD8hHh+FemN1cFbs73+fxUnaxbhaE0rs48YOJpwH2MUwUWilXsDg6n840RuCSpVRyWUCQYLqfhpH1tfdOsdmW/1LywZng0+HazqAvLw+6grFLgV9th+fMYghLfpFNp0fc+Q4u1Ahu6+JeZqv/LP0Ta10KOma79ks0/3FIZ7+dhLwbcnICPrMl0fvQ59jERRIjS0it3+GgI0EDR6xyEeAenYR1nlDW6SNMmPJ+6y4VPcrzvvBtCJAuN5AV/L2hlYTJm+XCIIz1kRtOwBlGVDyFIWMr8iTOh3mCKTxpPq4=
+  on:
+    tags: true
+    repo: ochorocho/kap-nextcloud
+  skip_cleanup: 'true'

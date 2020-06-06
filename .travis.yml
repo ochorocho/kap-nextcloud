@@ -5,6 +5,8 @@ before_install:
 - npm install
 script:
 - node_modules/.bin/eslint *.js
+before_deploy:
+- npm build
 deploy:
   provider: npm
   email: rothjochen@gmail.com

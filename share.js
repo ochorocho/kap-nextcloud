@@ -44,7 +44,7 @@ const share = (context, filePath) => {
 
     try {
       if (response.statusCode === 403) {
-        context.notify('Public upload was disabled by Nextcloud admin, use random password option in config')
+        context.notify(body.ocs.meta.message)
       } else {
         context.copyToClipboard(body.ocs.data.url + additionalInfo)
         context.notify('Nextcloud uploaded, link copied to Clipboard')

@@ -44,13 +44,13 @@ const share = (context, filePath) => {
 
     try {
       if (response.statusCode === 403) {
-        let regex = /([0-9])\w+/g
-        let match = body.ocs.meta.message.match(regex)
+        const regex = /([0-9])\w+/g
+        const match = body.ocs.meta.message.match(regex)
 
-        if(match === null) {
+        if (match === null) {
           context.notify(body.ocs.meta.message)
         } else {
-          let passwordLength = match[match.length - 1]
+          const passwordLength = match[match.length - 1]
           context.config.set('pwLength', passwordLength)
           share(context, filePath)
         }

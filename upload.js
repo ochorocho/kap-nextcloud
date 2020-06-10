@@ -22,6 +22,11 @@ const upload = (context, filePath) => {
     body: readmeStream
   },
   function (error, response) {
+    if (response.statusCode !== 201) {
+      context.config.delete('username')
+      context.config.delete('password')
+    }
+
     if (error) {
       return console.error('Nextcloud upload failed:', error)
     }

@@ -22,7 +22,7 @@ const share = (context, filePath) => {
     const generator = require('generate-password')
 
     const password = generator.generate({
-      length: 10,
+      length: context.config.get('pwLength'),
       numbers: true
     })
     shareOptions.password = password
@@ -44,7 +44,16 @@ const share = (context, filePath) => {
 
     try {
       if (response.statusCode === 403) {
-        context.notify(body.ocs.meta.message)
+        let regex = /([0-9])\w+/g
+        let match = body.ocs.meta.message.match(regex)
+
+        if(match === null) {
+          context.notify(body.ocs.meta.message)
+        } else {
+          let passwordLength = match[match.length - 1]
+          context.config.set('pwLength', passwordLength)
+          share(context, filePath)
+        }
       } else {
         context.copyToClipboard(body.ocs.data.url + additionalInfo)
         context.notify('Nextcloud uploaded, link copied to Clipboard')

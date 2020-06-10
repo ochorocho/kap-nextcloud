@@ -47,6 +47,12 @@ const nextcloud = {
       description: 'Link and Password will be Copied to Clipboard',
       default: false,
       type: 'boolean'
+    },
+    pwLength: {
+      title: 'Length of generated password',
+      description: 'Set a value bigger than Nextcloud\'s "Security -> Password policy -> Minimal Length"',
+      type: 'string',
+      default: '10'
     }
   }
 }

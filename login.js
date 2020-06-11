@@ -7,15 +7,6 @@ const login = context => {
   return new Promise((resolve, reject) => {
     const credentials = []
 
-    const authWindow = new BrowserWindow({
-      'use-content-size': true,
-      alwaysOnTop: true,
-      autoHideMenuBar: false,
-      webPreferences: {
-        nodeIntegration: false
-      }
-    })
-
     /**
      * Register nc:// protocol
      */
@@ -40,6 +31,15 @@ const login = context => {
       authWindow.destroy()
     }, function (error) {
       console.error(error)
+    })
+
+    const authWindow = new BrowserWindow({
+      'use-content-size': true,
+      alwaysOnTop: true,
+      autoHideMenuBar: false,
+      webPreferences: {
+        nodeIntegration: false
+      }
     })
 
     const extraHeaders = {

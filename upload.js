@@ -25,13 +25,14 @@ const upload = (context, filePath) => {
     if (response.statusCode !== 201) {
       context.config.delete('username')
       context.config.delete('password')
+    } else {
+      context.setProgress('Upload finished', 'completed')
+      share(context, filePath)
     }
 
     if (error) {
       return console.error('Nextcloud upload failed:', error)
     }
-    context.setProgress('Upload finished', 'completed')
-    share(context, filePath)
   })
 }
 

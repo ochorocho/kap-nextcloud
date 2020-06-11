@@ -1,7 +1,6 @@
 const electron = require('electron')
 const join = require('url-join')
 const { protocol } = require('electron')
-
 const BrowserWindow = electron.BrowserWindow || electron.remote.BrowserWindow
 
 const login = context => {
@@ -26,12 +25,12 @@ const login = context => {
       context.config.set('password', credentials.password)
 
       /**
-       * Resolve prmise and destroy BrowserWindow
+       * Resolve promise and destroy BrowserWindow
        */
       resolve()
       authWindow.destroy()
     }, function (error) {
-      console.error(error.message)
+      console.error(error)
     })
 
     const authWindow = new BrowserWindow({

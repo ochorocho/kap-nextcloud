@@ -33,7 +33,6 @@ const upload = (context, filePath) => {
     context.setProgress('Upload finished', 'completed')
     share(context, filePath)
   })
-  context.setProgress('Upload finished', 'completed')
 }
 
 module.exports = upload

@@ -57,7 +57,7 @@ const share = (context, filePath) => {
       } else {
         context.copyToClipboard(body.ocs.data.url + additionalInfo)
         context.notify('Nextcloud uploaded, link copied to Clipboard')
-        context.setProgress('Done', 'completed')
+        context.setProgress('Upload done and share link created…', 'completed')
       }
     } catch (error) {
       context.notify('Could not get share link: ' + error.message)

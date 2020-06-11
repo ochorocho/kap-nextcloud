@@ -8,6 +8,7 @@ const action = async context => {
       await login(context)
     } catch (error) {
       if (error.message === 'canceled') {
+        context.setProgress('Authorization completed', 'completed')
         context.cancel()
       } else {
         console.error(error.message)

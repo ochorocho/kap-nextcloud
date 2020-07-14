@@ -1,6 +1,6 @@
 {
   "name": "kap-nextcloud",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Upload Screencast to your Nextcloud Instance",
   "main": "index.js",
   "scripts": {
@@ -20,15 +20,15 @@
   "license": "MIT",
   "dependencies": {
     "generate-password": "^1.5.1",
-    "moment": "^2.26.0",
+    "moment": "^2.27.0",
     "request": "^2.88.2",
     "url-join": "^4.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.2.0",
+    "eslint": "^7.4.0",
     "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1"
